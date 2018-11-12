@@ -25,7 +25,7 @@ string stringtestfunc()
 
 
 // any of the following can be called from main 
-void stringtestmain()
+int main()
 {
 	/////
 	string s1;
@@ -159,5 +159,5 @@ void stringtestmain()
 	//cout << "s4  is: " << s4 << endl;
 	///////////////////////
 
-
+    return 0;
 }

@@ -49,7 +49,5 @@ int main()
 	cout << " Done. Enter any nymber to finish." << endl;
 	cin>>temp;
     
-    stringtestfunc();
-    
     return 0;
 }
