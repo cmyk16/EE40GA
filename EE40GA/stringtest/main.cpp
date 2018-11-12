@@ -82,7 +82,7 @@ int main()
 	//// IO to/form file
 	
 	// with the "empty" basedirectory the file should be where the source files are 
-	string basedir="";
+	string basedir="/Users/willatherton/Documents/GitHub/EE40GA/EE40GA/EE40GA";
 
 	// otherwise put a full path here (use \\ instead of \ )
 	//string basedir="H:\\fverdiccABDN\\UniABDN\\MyCourses\\EG40GA\\LectureNoteRepository\\EE40GA_Sort\\IOfiles\\";
