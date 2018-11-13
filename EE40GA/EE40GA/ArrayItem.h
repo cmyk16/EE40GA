@@ -234,14 +234,17 @@ public:
 //class to use string items
 class string_item : public basic_item {
 protected:
-	string string_value;
+	string item_value;
 	string firstname[13] = { "Chad", "Kronisford", "Jack", "Will", "Tom", "Gerald", "Bertram", "Chowdrey", "Alistair", "Benisford", "Gideon", "Quarian", "Magnus" };
 	string surname[12] = { "Atherton", "Godfrey", "MacLean", "Fyfe", "Connington", "Reese-Mogg", "Jeoffrey-Brown", "Buckinham", "Pensombry", "Addington", "Chadlington", "Chad" };
 	string bloodtype[8] = { "O-", "O+", "A-", "A+", "B-","B+", "AB-","AB+" };
-	int type = 1; //1 by default
+	int type = 3; //3 by default
 
 public:
-	string getItemVal() { return string_value; }
+	string_item() { ; }
+	~string_item() { ; }
+
+	string getItemVal() { return item_value; }
 
 	virtual void printItemOnScreen()
 	{
@@ -255,7 +258,7 @@ public:
 	virtual void enterItemFromKeyboard()
 	{
 		cout << "Insert element then hit enter." << endl;
-		cin >> string_value;
+		getline(cin, item_value);
 		cout << endl;
 
 		// item filled
@@ -269,22 +272,24 @@ public:
 		switch (type) {
 			case 1: 
 				i = rand() % 13;
-				string_value = firstname[i];
+				item_value = firstname[i];
 				break;
 			
 			case 2: 
 				i = rand() % 12;
-				string_value = surname[i];
+				item_value = surname[i];
 				break;
 			
 			case 3: 
 				i = rand() % 8;
-				string_value = bloodtype[i];
+				item_value = bloodtype[i];
 				break;
 			
 			default:
 				break;
 		}
+		// item filled
+		empty = false;
 	}
 
 	virtual bool IsLargerThan(basic_item* other_item, basic_sort_criteria* sort_criteria = NULL)
@@ -331,7 +336,7 @@ public:
 		if (typecasted_item_ptr == NULL)
 		{
 			// items of the wrong type (or null pointers)
-			cout << "Error in deallocateItem (for string_item): " << endl << "Other item is not of type integer_item." << endl;
+			cout << "Error in deallocateItem (for string_item): " << endl << "Other item is not of type string_item." << endl;
 			return;
 		}
 		delete typecasted_item_ptr;
@@ -345,7 +350,7 @@ public:
 		return result;
 	}
 
-	virtual void setstringtype(int i) { string_value = i; }
+	virtual void setstringtype(int i) { type = i; }
 
 };
 
