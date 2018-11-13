@@ -12,6 +12,7 @@
 names names;
 
 int main(int argc, const char * argv[]) {
+    srand (time(NULL));
     names.randomize();
     return 0;
 }

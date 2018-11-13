@@ -112,6 +112,22 @@ public:
 		empty=false;
 		
 	}
+    
+    virtual void generateRandomBio(int min, int max){
+        
+        int item;
+        
+        item=rand();
+        //item = item % (max+1);
+        
+        //item = item + min;
+        
+        item=min + rand() % (( max + 1 ) - min);
+        
+        item_value=item;
+        // item filled
+        empty=false;
+    };
 	
 	//virtual void loadItemFromFile(FILE* fin);
 	

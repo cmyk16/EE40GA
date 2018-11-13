@@ -16,43 +16,39 @@
 
 class names : public general_array  {
 public:
-    char firstNames[5][10];
-    char lastNames[5][11];
     
     char bloodType[8][10] = {"O-", "O+", "A-","A+", "B-", "B+", "AB-", "AB+"};
     
-    int random_no_generate(int min, int max){
-        int item;
-        
-        item=rand();
-        item = item % (max+1);
-        
-        item = item + min;
-        return item;
-    };
+    integer_item db_height;
+    integer_item db_weight;
+    integer_item db_bloodtype;
     
     int randomize(){
-        srand (time(NULL));
-        char rnd_firstNames[5][10] = {"John", "Robb", "Bran","Arya", "Sansa"};
-        char rnd_lastNames[5][11] = {"Stark", "Lanister", "Baratheon","Targaryen"};
         
         int i;
         for (i=0; i<=5; i++){
-            int Fname_rnd = random_no_generate(0, 4);
-            int Lname_rnd = random_no_generate(0, 4);
-            int height_rnd = random_no_generate(100, 200);
-            int weight_rnd = random_no_generate(50, 120);
-            int blood_rnd = random_no_generate(0, 4);
+            //int Fname_rnd = random_no_generate(0, 4);
+            //int Lname_rnd = random_no_generate(0, 4);
+            //int height_rnd = random_no_generate(100, 200);
+            //int weight_rnd = random_no_generate(50, 120);
+            //int blood_rnd = random_no_generate(0, 4);
             
+            //printf("%s %s %d %d %s\n", rnd_firstNames[Fname_rnd], rnd_lastNames[Lname_rnd], height_rnd, weight_rnd, bloodType[blood_rnd]);
             
+            //integer_item ref_integer;
             
+            db_height.generateRandomBio(100,200);
+            db_weight.generateRandomBio(50,120);
+            db_bloodtype.generateRandomBio(0,7);
             
-            
-            printf("%s %s %d %d %s\n", rnd_firstNames[Fname_rnd], rnd_lastNames[Lname_rnd], height_rnd, weight_rnd, bloodType[blood_rnd]);
-            
-        
-        
         }
+        
+        cout << "Height = " << db_height.getItemVal() << " ";
+        cout << "Weight = " << db_weight.getItemVal() << " ";
+        cout << "Blood Type = " << bloodType[db_bloodtype.getItemVal()] << endl;
+        
+        //db_height.printArrayOnScreen();
+            
         return 0;
     };
 //protected:
