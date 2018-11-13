@@ -6,6 +6,9 @@ using namespace std;
 
 #include "stdlib.h" 
 #include "time.h" 
+#include <string>
+#include <sstream>
+#include <fstream>
 
 ////// this is needed to check compatibility between items (and to use a derived-class pointer that is passes as "base class")
 template <class Base, class Derived> Derived* typecastItem(Base* basic_ptr, Derived* derivedItem_ptr)
@@ -225,6 +228,124 @@ public:
 				empty=true;
 		}
 	}
+
+};
+
+//class to use string items
+class string_item : public basic_item {
+protected:
+	string string_value;
+	string firstname[13] = { "Chad", "Kronisford", "Jack", "Will", "Tom", "Gerald", "Bertram", "Chowdrey", "Alistair", "Benisford", "Gideon", "Quarian", "Magnus" };
+	string surname[12] = { "Atherton", "Godfrey", "MacLean", "Fyfe", "Connington", "Reese-Mogg", "Jeoffrey-Brown", "Buckinham", "Pensombry", "Addington", "Chadlington", "Chad" };
+	string bloodtype[8] = { "O-", "O+", "A-", "A+", "B-","B+", "AB-","AB+" };
+	int type = 1; //1 by default
+
+public:
+	string getItemVal() { return string_value; }
+
+	virtual void printItemOnScreen()
+	{
+		if (isEmpty()) {
+			cout << "String is Empty." << endl;
+		}
+		else
+			cout << "String is " << getItemVal() << "." << endl;
+	}
+
+	virtual void enterItemFromKeyboard()
+	{
+		cout << "Insert element then hit enter." << endl;
+		cin >> string_value;
+		cout << endl;
+
+		// item filled
+		empty = false;
+	}
+
+	//function to get random string from the protected
+	virtual void generateRandomItem()//1 is firstname, 2 is surname, 3 is blood type
+	{
+		int i;
+		switch (type) {
+			case 1: 
+				i = rand() % 13;
+				string_value = firstname[i];
+				break;
+			
+			case 2: 
+				i = rand() % 12;
+				string_value = surname[i];
+				break;
+			
+			case 3: 
+				i = rand() % 8;
+				string_value = bloodtype[i];
+				break;
+			
+			default:
+				break;
+		}
+	}
+
+	virtual bool IsLargerThan(basic_item* other_item, basic_sort_criteria* sort_criteria = NULL)
+	{
+		bool result = false;
+		// if the other item is "empty" (non allocated) don't do any comparison
+		if (other_item == NULL)
+			return false;
+
+		// first typecast the other item to confimr it is the same as this;
+		string_item* typecasted_other_item = typecastItem(other_item, this);
+
+		// check that it worked
+		if (typecasted_other_item == NULL)
+		{
+			cout << "Other item is not of type string_item." << endl;
+			return false;
+			// items of the wrong type (or null pointers) will be pushed to the end of the list
+		}
+
+		// now verify if the other item is larger than the curren
+		if ((getItemVal().compare(typecasted_other_item->getItemVal())>0))
+			result = true;
+
+
+
+		// chek if there are sorting options to apply 
+		if (sort_criteria != NULL)
+		{
+			// if sorting is in descending order the result is reversed 
+			if (!(sort_criteria->getAscending()))
+				result = !result;
+		}
+
+		return result;
+	}
+
+	virtual void deallocateItem(basic_item* item_ptr)
+	{
+		// first typecast the other item to confimr it is the same as this;
+		string_item* typecasted_item_ptr = typecastItem(item_ptr, this);
+
+		// check that it worked
+		if (typecasted_item_ptr == NULL)
+		{
+			// items of the wrong type (or null pointers)
+			cout << "Error in deallocateItem (for string_item): " << endl << "Other item is not of type integer_item." << endl;
+			return;
+		}
+		delete typecasted_item_ptr;
+	}
+
+	virtual basic_item* allocateItem()
+	{
+		string_item* result = new string_item;
+		if (result == NULL)
+			cout << " Error in string_item::allocateItem(): out of memory" << endl;
+		return result;
+	}
+
+	virtual void setstringtype(int i) { string_value = i; }
 
 };
 
