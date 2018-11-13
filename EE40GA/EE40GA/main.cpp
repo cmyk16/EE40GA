@@ -1,10 +1,7 @@
 
 #include <ArrayItem.h>
 #include <generalArray.h>
-
-
-
-
+#include <SomeStringTests.h>
 
 void test_array(int array_size, basic_item* ref_item)
 {
@@ -36,8 +33,10 @@ int main()
 	int temp;	
 	// Used as "example item" by the general_array to populate the entire array with integer_item 
 	integer_item ref_int_item;
-	// Used as "example item" by the general_array to populate the entire array with neg_int_item 
+	// Used as "example item" by the general_array to populate the entire array with neg_int_item
 	neg_int_item ref_nint_item;
+    
+    
 	// First test with the inger item
 	cout << " Testing array with integer (positve and negative) items: " << endl << endl;
 	test_array(array_size, &ref_int_item);
