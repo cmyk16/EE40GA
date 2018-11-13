@@ -2,7 +2,7 @@
 #define __GENERALARRAY_H_
 
 
-#include "arrayItem.h"
+#include "ArrayItem.h"
 
 
 
